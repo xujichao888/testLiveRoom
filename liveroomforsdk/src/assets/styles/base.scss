@@ -1,0 +1,67 @@
+
+
+//语音房左右padding
+$live-room-padding:0 50px;
+
+//共用透明背景黑色 10%
+$ten-percent-black:rgba(0,0,0,0.1);
+$ten-percent-white:rgba(255,255,255,0.1);
+$fifteen-percent-white:rgba(255,255,255,0.15);
+//共用透明背景黑色 15%
+$fifteen-percent-black:rgba(0,0,0,0.15);
+
+//弹出按钮颜色(多数紫色渐变按钮颜色）
+$popup-btn-gradual-changes:linear-gradient(to right,#aa7dff,#eb8cf5);
+$popup-btn-gradual-bg:linear-gradient(to top,#aa7dff,#eb8cf5);
+//多数灰色未选中按钮颜色
+$gray-unActive-btn:#f5f5f5;
+
+// 渐变变量 按钮的渐变变量
+$btn-gradual-change-start:#ff64fa;
+$btn-gradual-change-end:#ff5a87;
+
+//title渐变
+$yellow-gradual-changes:linear-gradient(to right,#fd8d29,#fbbc26);
+//紫色渐变 （性别按钮）
+$violet-gradual-changes:linear-gradient(to right,#ff41ff,#ff7dff);
+//房主渐变按钮（等级）
+$marster-gradual-changes:linear-gradient(to left,#1bd7de,#58cc7f);
+//管理员渐变按钮（等级）
+$admin-gradual-changes:$yellow-gradual-changes;
+//level小于10级(等级）
+$levelLessTen-gradual-changes:linear-gradient(to left,#92d329,#7ab916);
+//level大于10级小于99(等级）
+$greaterTen-gradual-changes:linear-gradient(to left,#e0a783,#e09583);
+//level大于99(等级）
+$greater-ninety-nine-gradual-changes:linear-gradient(to left,#3e5afb,#803afa);
+
+//麦克风状态按钮渐变（在线列表）
+$mic-state-btn-online:linear-gradient(to right,#505050,#787878);
+
+
+//分割线
+$line-default:solid 2px rgba(255,255,255,0.15); //黑色底分割线
+$line-default-color:#e1e1e1; //白色底分割线
+$line-default-white:solid 1px #e1e1e1;  //白底分割线
+$line-default-opcaty-white:solid 3px rgba(255,255,255,0.15);
+//背景的渐变
+$bg-gradual-change-end:#8a55da;
+$bg-gradual-change-start:#b65ac1;
+$bg-gradual-change-all:linear-gradient(to bottom,#b65ac1,#803afa);
+//全局的字号
+$text-large-size:50px;
+$text-normal-size:38px;
+$text-normal-mini-size:34px;
+$text-mini-size:20px;
+$text-gray-color:#d9d9d9;
+$text-gray-normal-color:#a0a0a0;
+$text-pink-white-normal:#ebddf2;
+$text-black-normal-color:#3c3c3c;
+$text-gradual-active-color:#aa7dff;
+$text-gold-color:#ff8c00;
+//第一排头像分数的颜色
+$avatar-score-first:#ffe600;
+$avatar-score-first-text:#cc7e21;
+$avatar-score-second:#aec3d0;
+$avatar-score-third:#c69c7d;
+$avatar-score-fourth:#000000;

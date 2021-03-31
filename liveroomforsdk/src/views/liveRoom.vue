@@ -68,6 +68,12 @@
           <div class="face-contents" v-show="moveType == 'face'">
               <div v-for="(item,index) in emojiArr" :key="index" :class="item.className" class="faceList">
               </div>
+              <div class="send-face-box">
+                  <div class="delete face-btn">
+                    <img src="@/assets/icons/removeString.png" class="removes">
+                  </div>
+                  <div class="sends face-btn">Send</div>
+              </div>
           </div>
       </div>
        <!-- 聊天列表 -->
@@ -711,7 +717,7 @@ export default {
                 if(!this.keybroadCanDown){return false}
                 this.keybroadHeight = 0;
                 document.body.style.overflow = '';
-          
+               
   
                    this.moveDown()
                
@@ -766,7 +772,8 @@ export default {
                 } 
     },
     moveDown(){
-            this.micsClickNum = 1
+            this.micsClickNum = 1;
+            this.moveType = '';
             let height = (this.saveKeybroadHeight*-1) * (750 / this.containerWidth);
           //   console.log(height)
        
@@ -1172,12 +1179,50 @@ export default {
           .face-contents{
              width: 100%;
              height: 100%;
+             padding: 30px;
              overflow: auto;
              display: flex;
              flex-wrap: wrap;
              align-content: flex-start;
+             justify-content: space-between;
+             box-sizing: border-box;
+             position: relative;
              .faceList{
-               
+               margin: 0 20px;
+               margin-bottom: 20px;
+             }
+             .send-face-box{
+               width: 360px;
+               height: 200px;
+               background-color:#323232;
+               position: fixed;
+               right: 50px;
+               top: 530px;
+               display: flex;
+               align-items: center;
+               justify-content: space-around;
+              
+               .face-btn{
+                 width: 155px;
+                 height: 85px;
+                 background-color: #484848;
+                 border-radius: 85px;
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
+               }
+               .sends{
+                 background:$popup-btn-gradual-changes;
+                 color: #fff;
+               }
+               .delete{
+
+                 .removes{
+                   width: 157px;
+                   height: 120px;
+                   display: block;
+                 }
+               }
              }
           }
       }

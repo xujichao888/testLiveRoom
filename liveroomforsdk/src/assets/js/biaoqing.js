@@ -1,278 +1,195 @@
-let biaoqing = 
-
-   [{
-    className: 'bg-1f604',
-    icon: '😄'
-  },
+let biaoqing = [
     {
-      className: 'bg-1f603',
-      icon: '😃'
+      className: 'bg-1fa1',
+      icon: '#bg-1fa1#'
     },
     {
-      className: 'bg-1f600',
-      icon: '😀'
+      className: 'bg-1fa2',
+      icon: '#bg-1fa2#'
     },
     {
-      className: 'bg-1f60a',
-      icon: '😊'
+      className: 'bg-1fa3',
+      icon: '#bg-1fa3#'
     },
-
     {
-      className: 'bg-1f609',
-      icon: '😉'
+      className: 'bg-1fa4',
+      icon: '#bg-1fa4#'
     },
     {
-      className: 'bg-1f60d',
-      icon: '😍'
+      className: 'bg-1fa5',
+      icon: '#bg-1fa5#'
     },
     {
-      className: 'bg-1f618',
-      icon: '😘'
+      className: 'bg-1fa6',
+      icon: '#bg-1fa6#'
     },
     {
-      className: 'bg-1f61a',
-      icon: '😚'
+      className: 'bg-1fa7',
+      icon: '#bg-1fa7#'
     },
     {
-      className: 'bg-1f617',
-      icon: '😗'
+      className: 'bg-1fa8',
+      icon: '#bg-1fa8#'
     },
     {
-      className: 'bg-1f619',
-      icon: '😙'
+      className: 'bg-1fa9',
+      icon: '#bg-1fa9#'
     },
     {
-      className: 'bg-1f61c',
-      icon: '😜'
+      className: 'bg-1fa10',
+      icon: '#bg-1fa10#'
     },
     {
-      className: 'bg-1f61d',
-      icon: '😝'
+      className: 'bg-1fa11',
+      icon: '#bg-1fa11#'
     },
     {
-      className: 'bg-1f61b',
-      icon: '😛'
+      className: 'bg-1fa12',
+      icon: '#bg-1fa12#'
     },
     {
-      className: 'bg-1f633',
-      icon: '😳'
+      className: 'bg-1fa13',
+      icon: '#bg-1fa13#'
     },
     {
-      className: 'bg-1f601',
-      icon: '😁'
+      className: 'bg-1fa14',
+      icon: '#bg-1fa14#'
     },
     {
-      className: 'bg-1f614',
-      icon: '😔'
+      className: 'bg-1fa15',
+      icon: '#bg-1fa15#'
     },
     {
-      className: 'bg-1f60c',
-      icon: '😌'
+      className: 'bg-1fa16',
+      icon: '#bg-1fa16#'
     },
     {
-      className: 'bg-1f612',
-      icon: '😒'
+      className: 'bg-1fa17',
+      icon: '#bg-1fa17#'
     },
     {
-      className: 'bg-1f61e',
-      icon: '😞'
+      className: 'bg-1fa18',
+      icon: '#bg-1fa18#'
     },
     {
-      className: 'bg-1f623',
-      icon: '😣'
+      className: 'bg-1fa19',
+      icon: '#bg-1fa19#'
     },
     {
-      className: 'bg-1f622',
-      icon: '😢'
+      className: 'bg-1fa20',
+      icon: '#bg-1fa20#'
     },
     {
-      className: 'bg-1f602',
-      icon: '😂'
+      className: 'bg-1fa21',
+      icon: '#bg-1fa21#'
     },
     {
-      className: 'bg-1f62d',
-      icon: '😭'
+      className: 'bg-1fa22',
+      icon: '#bg-1fa22#'
     },
     {
-      className: 'bg-1f62a',
-      icon: '😪'
+      className: 'bg-1fa23',
+      icon: '#bg-1fa23#'
     },
     {
-      className: 'bg-1f625',
-      icon: '😥'
+      className: 'bg-1fa24',
+      icon: '#bg-1fa24#'
     },
     {
-      className: 'bg-1f630',
-      icon: '😰'
+      className: 'bg-1fa25',
+      icon: '#bg-1fa25#'
     },
     {
-      className: 'bg-1f605',
-      icon: '😅'
+      className: 'bg-1fa26',
+      icon: '#bg-1fa26#'
     },
     {
-      className: 'bg-1f613',
-      icon: '😓'
+      className: 'bg-1fa27',
+      icon: '#bg-1fa27#'
     },
     {
-      className: 'bg-1f629',
-      icon: '😩'
+      className: 'bg-1fa28',
+      icon: '#bg-1fa28#'
     },
     {
-      className: 'bg-1f62b',
-      icon: '😫'
+      className: 'bg-1fa29',
+      icon: '#bg-1fa29#'
     },
     {
-      className: 'bg-1f628',
-      icon: '😨'
+      className: 'bg-1fa30',
+      icon: '#bg-1fa30#'
     },
     {
-      className: 'bg-1f631',
-      icon: '😱'
+      className: 'bg-1fa31',
+      icon: '#bg-1fa31#'
     },
     {
-      className: 'bg-1f620',
-      icon: '😠'
+      className: 'bg-1fa32',
+      icon: '#bg-1fa32#'
     },
     {
-      className: 'bg-1f621',
-      icon: '😡'
+      className: 'bg-1fa33',
+      icon: '#bg-1fa33#'
     },
     {
-      className: 'bg-1f624',
-      icon: '😤'
+      className: 'bg-1fa34',
+      icon: '#bg-1fa34#'
     },
     {
-      className: 'bg-1f616',
-      icon: '😖'
+      className: 'bg-1fa35',
+      icon: '#bg-1fa35#'
     },
     {
-      className: 'bg-1f606',
-      icon: '😆'
+      className: 'bg-1fa36',
+      icon: '#bg-1fa36#'
     },
     {
-      className: 'bg-1f60b',
-      icon: '😋'
+      className: 'bg-1fa37',
+      icon: '#bg-1fa37#'
     },
     {
-      className: 'bg-1f637',
-      icon: '😷'
+      className: 'bg-1fa38',
+      icon: '#bg-1fa38#'
     },
     {
-      className: 'bg-1f60e',
-      icon: '😎'
+      className: 'bg-1fa39',
+      icon: '#bg-1fa39#'
     },
     {
-      className: 'bg-1f634',
-      icon: '😴'
+      className: 'bg-1fa40',
+      icon: '#bg-1fa40#'
     },
     {
-      className: 'bg-1f635',
-      icon: '😵'
+      className: 'bg-1fa41',
+      icon: '#bg-1fa41#'
     },
     {
-      className: 'bg-1f632',
-      icon: '😲'
+      className: 'bg-1fa42',
+      icon: '#bg-1fa42#'
     },
     {
-      className: 'bg-1f61f',
-      icon: '😟'
+      className: 'bg-1fa43',
+      icon: '#bg-1fa43#'
     },
     {
-      className: 'bg-1f626',
-      icon: '😦'
+      className: 'bg-1fa44',
+      icon: '#bg-1fa44#'
     },
     {
-      className: 'bg-1f627',
-      icon: '😧'
+      className: 'bg-1fa45',
+      icon: '#bg-1fa45#'
     },
     {
-      className: 'bg-1f608',
-      icon: '😈'
+      className: 'bg-1fa46',
+      icon: '#bg-1fa46#'
     },
     {
-      className: 'bg-1f47f',
-      icon: '👿'
+      className: 'bg-1fa47',
+      icon: '#bg-1fa47#'
     },
     {
-      className: 'bg-1f62e',
-      icon: '😮'
-    },
-    {
-      className: 'bg-1f62c',
-      icon: '😬'
-    },
-    {
-      className: 'bg-1f610',
-      icon: '😐'
-    },
-    {
-      className: 'bg-1f615',
-      icon: '😕'
-    },
-    {
-      className: 'bg-1f62f',
-      icon: '😯'
-    },
-    {
-      className: 'bg-1f636',
-      icon: '😶'
-    },
-    {
-      className: 'bg-1f607',
-      icon: '😇'
-    },
-    {
-      className: 'bg-1f60f',
-      icon: '😏'
-    },
-    {
-      className: 'bg-1f611',
-      icon: '😑'
-    },
-    {
-      className: 'bg-1f63a',
-      icon: '😺'
-    },
-    {
-      className: 'bg-1f638',
-      icon: '😸'
-    },
-    {
-      className: 'bg-1f63b',
-      icon: '😻'
-    },
-    {
-      className: 'bg-1f63d',
-      icon: '😽'
-    },
-    {
-      className: 'bg-1f63c',
-      icon: '😼'
-    },
-
-    {
-      className: 'bg-1f640',
-      icon: '🙀'
-    },
-    {
-      className: 'bg-1f63f',
-      icon: '😿'
-    },
-    {
-      className: 'bg-1f639',
-      icon: '😹'
-    },
-    {
-      className: 'bg-1f63e',
-      icon: '😾'
-    },
-    {
-      className: 'bg-1f479',
-      icon: '👹'
-    },
-    {
-      className: 'bg-1f47a',
-      icon: '👺'
+      className: 'bg-1fa48',
+      icon: '#bg-1fa48#'
     },
   ]
 export default biaoqing;

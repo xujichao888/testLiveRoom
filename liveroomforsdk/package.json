@@ -50,7 +50,6 @@
       },
       "postcss-pxtorem": {
         "rootValue": 108,
-        "selectorBlackList":["bg-1f"],
         "propList": [
           "*"
         ]

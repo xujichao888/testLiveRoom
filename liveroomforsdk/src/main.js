@@ -7,8 +7,8 @@ import publicJS from './assets/js/publicJS';
 import Vconsole from 'vconsole'
 import LongPress from './assets/js/longPress'
 Vue.use(LongPress, {time: 1000})
-let vConsole = new Vconsole()
-Vue.use(vConsole)
+// let vConsole = new Vconsole()
+// Vue.use(vConsole)
 import dsbridge from 'dsbridge';
 Vue.prototype.$dsbridge = dsbridge;
 Vue.use(publicJS)

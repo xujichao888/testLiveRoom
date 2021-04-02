@@ -66,10 +66,10 @@
               </div>
           </div>
           <div class="face-contents" v-show="moveType == 'face'">
-              <div v-for="(item,index) in emojiArr" :key="index" :class="item.className" class="faceList">
+              <div v-for="(item,index) in emojiArr" :key="index" :class="item.className" class="faceList" @click="handleFaceClick(item)">
               </div>
               <div class="send-face-box">
-                  <div class="delete face-btn">
+                  <div class="delete face-btn" @click="backToOneStep">
                     <img src="@/assets/icons/removeString.png" class="removes">
                   </div>
                   <div class="sends face-btn">Send</div>
@@ -130,7 +130,7 @@
                           </div>
                       </div>
                   </div>
-                  <div class="talk-page-content">
+                  <!-- <div class="talk-page-content">
                       <div>content</div>
                       <div>content</div>
                       <div>content</div>
@@ -208,14 +208,23 @@
                       <div>content</div>
                       <div>content</div>
                       <div>content</div>
-                  </div>
+                  </div> -->
                   <div class="bottom-bars">
                       <img src="@/assets/icons/icon_maikefeng.png" class="mic-icon" @click.stop="stopDownKeybroad('mic')">
                       <div class="inputs-box"  @click.stop="()=>{}">
-                          <div  contenteditable="true"  class="inputs" placeholder="Type a message..." @focus="talkInputFocus"></div>
+                        <!-- 输入框 -->
+                          <div  
+                            contenteditable="true" 
+                            @click.stop="contentClick"  
+                            class="inputs" 
+                            placeholder="Type a message..." 
+                            @focus="talkInputFocus('ele')" id="popupInputs"
+                            @input="inputWatch"
+                            @mousedown="changeClickInputState"
+                            ></div>
                       </div>
                       <img src="@/assets/icons/face-img.png" class="mic-icon other" @click.stop="stopDownKeybroad('face')">
-                      <img src="@/assets/icons/send-img.png" class="mic-icon other" @click.stop="stopDownKeybroad('img')">
+                      <img src="@/assets/icons/send-img.png" class="mic-icon other" >
                       <img src="@/assets/icons/gift-line.png" class="mic-icon other">
                   </div>
               </div>
@@ -561,6 +570,8 @@ export default {
       rubbishcircleA:false,//垃圾箱高亮
       micsClickNum:0,
       moveType:'',//保存点击了哪个图标，控制聊天内容的显示，和是否推页面
+      lastEditRange:'',//最后光标位置,
+      isClickInput:true,//判断是不是点了input，如果是弹出键盘，如果不是加入表情
     }
   },
   methods:{
@@ -571,8 +582,66 @@ export default {
         this.channelInputBindValue=""
       }
     },
-    testS(e){
-        console.log(e)
+    backToOneStep(){
+        var div = document.getElementById("popupInputs");
+        let length = div.childNodes.length;
+        console.log(length)
+        if(length==0)return false
+      var rangeObj = document.createRange();
+      rangeObj.setStart(div,length-1);
+      rangeObj.setEnd(div,length);
+     rangeObj.deleteContents();
+    },
+    inputWatch(){
+        this.lastEditRange = getSelection().getRangeAt(0)
+    },
+    contentClick(){
+        // 获取选定对象
+        var selection = getSelection()
+        // 设置最后光标对象
+        this.lastEditRange = selection.getRangeAt(0);
+    },
+    handleFaceClick(item){ //点击表情
+        console.log('insertHtmlAtCaret')
+        document.getElementById('popupInputs').focus();
+      
+        var sel = window.getSelection();
+        console.log(sel)
+        // 判断是否有最后光标对象存在
+        if (this.lastEditRange) {
+          // 存在最后光标对象，选定对象清除所有光标并添加最后光标还原之前的状态
+          sel.removeAllRanges()
+          sel.addRange(this.lastEditRange)
+        }
+        var html = `<img src="opacity.png" class="${item.className}" style="width:15px;height:15px;vertical-align: sub;"></img>`;
+        var  range;
+          if (window.getSelection) {
+            // IE9 and non-IE
+            sel = window.getSelection();
+            if (sel.getRangeAt && sel.rangeCount) {
+              range = sel.getRangeAt(0);
+              range.deleteContents();
+              var el = document.createElement("span");
+              el.innerHTML = html;
+              var frag = document.createDocumentFragment(), node, lastNode;
+              while ((node = el.firstChild)) {
+                lastNode = frag.appendChild(node);
+              }
+              range.insertNode(frag);
+              if (lastNode) {
+                range = range.cloneRange();
+                range.setStartAfter(lastNode);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+              }
+            }
+          } else if (document.selection && document.selection.type != "Control") {
+            // IE < 9
+            document.selection.createRange().pasteHTML(html);
+          }
+        // 无论如何都要记录最后光标对象
+        this.lastEditRange = sel.getRangeAt(0)
     },
     touchS(e){
       console.log('开始了')
@@ -632,6 +701,9 @@ export default {
         let bool = false
         console.log('new',type)
         console.log('old',this.moveType)
+        if(type == 'face'){
+            this.isClickInput = false
+        }
         if(this.moveType==''){ //判断是切换了图标还是一个图标点了两次
           this.moveType = type;
         }else{
@@ -645,7 +717,7 @@ export default {
         }
         if(this.talkInputIsFocus){
            this.keybroadCanDown = false; 
-           this.talkInputIsFocus = false
+           this.talkInputIsFocus = false;
         }else{
             if(this.saveKeybroadHeight == 0){
               this.keybroadHeight = -260;
@@ -665,14 +737,23 @@ export default {
             }
         }
     },
-    talkInputFocus(){
-      this.talkInputIsFocus = true;
+    changeClickInputState(){
+      this.isClickInput = true
+    },
+    talkInputFocus(type){
+      console.log('focus',this.isClickInput)
+      if(this.isClickInput){
+        this.talkInputIsFocus = true;
         this.moveType = ''
+      }else{
+         document.activeElement.blur()
+      }
     },
     startDownKeybroad(){ //键盘可以落下
       this.downKeyBroadNum++
       this.keybroadCanDown = true; 
-      this.talkInputIsFocus = false
+      this.talkInputIsFocus = false;
+      this.isClickInput = true;
       this.keybroadHeight = 0;
       document.body.style.overflow = ''
       if(this.downKeyBroadNum==1){ //只执行一次
@@ -1328,12 +1409,13 @@ export default {
                 bottom: 0;
                 border-top: $line-default;
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 justify-content: space-between;
                 padding: $live-room-padding;
                 .mic-icon{
                     width: 48px;
                     display: block;
+                    margin-bottom: 45px;
                 }
                 .other{
                     width: 60px;
@@ -1341,22 +1423,29 @@ export default {
                 }
                 .inputs-box{
                     width: 552px;
-                    height: 108px;
+                     min-height: 108px;
                     box-sizing: border-box;
                     background-color: #464646;
                     border-radius: 108px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                     margin-bottom: 20px;
+                     border: none;
                     .inputs{
-                        width: 420px;
-                        height: 80px;
-                   
+                        width: 460px;
+                        min-height: 80px;
+                        padding: 20px 0;
+                        box-sizing: border-box;
                         font-size: $text-normal-size;
-                        line-height: 80px;
                         text-align: start;
                         border: none;
+                     
+                        .otherimgs{
+                          background-color: #fff;
+                        }
                     }
+                   
                     [contenteditable]:focus{outline: none;}
                 }
             }

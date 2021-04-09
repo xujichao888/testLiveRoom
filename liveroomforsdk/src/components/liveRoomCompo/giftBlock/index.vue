@@ -1,7 +1,10 @@
 <template>
     <div class="gift-block" :class="{opacity:renderJsonIsEmpty}" @click="select">
-        <div class="img-box">
-            <img :src="renderJson.img" class="img" >
+        <div class="img-box" :class="{active:isActive}">
+            <div class="img-small-box">
+                <img :src="renderJson.img" class="img" >
+            </div>
+            
         </div>
         <div class="giftname">{{renderJson.giftName}}</div>
         <div class="price-box">
@@ -16,7 +19,8 @@ export default {
     props:{
         renderJson:Object,
         row:Number,
-        idx:Number
+        idx:Number,
+        isActive:Boolean
     },
     computed:{
         renderJsonIsEmpty(){ //判断空对象
@@ -41,15 +45,32 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+      
         .img-box{
             width: 238px;
             height: 238px;
             display: flex;
             align-items: center;
             justify-content: center;
-            .img{
-                width: 75%;
+                    background-color: #3c3c3c;
+              border-radius: 30px;
+            .img-small-box{
+                width: 234px;
+                height: 234px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #3c3c3c;
+                   border-radius: 30px;
+                .img{
+                    width: 75%;
+                }
             }
+         
+        }
+        .active{
+            background: $violet-gradual-changes;
+      
         }
         .price-box{
             display: flex;
@@ -68,4 +89,5 @@ export default {
     .opacity{
         opacity: 0;
     }
+
 </style>

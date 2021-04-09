@@ -1,5 +1,6 @@
 <template>
   <div class="live-container" :style="{height:containerHeight+'px'}" ref="liveContainer">
+      <div id="svgaCanvas" class="svga-container" v-show="SVGAisFinish"></div>
       <!-- 最上方第一排的内容 -->
       <top-row @showOnline="showOnline" @back="backToIndex"/>
       <!-- 房主喇叭 -->
@@ -299,9 +300,9 @@
                           :idx="idx" 
                           :row="index"
                           :renderJson="i"
+                          :isActive="i.isSelect"
                           @select="selectGift"
                         />
-
                     </div>
 
                 </van-swipe-item>
@@ -348,7 +349,8 @@ import shareBtn from '@/components/publicCompo/shareBtn'
 import giftWall from '@/components/liveRoomCompo/giftWall'
 import talkOneContent from '@/components/liveRoomCompo/talkOneContent';
 import followBtn from '@/components/publicCompo/followBtn';
-import { mapState,mapMutations } from 'vuex'
+import { mapState,mapMutations } from 'vuex';
+import SVGA from "svgaplayerweb";
 export default {
   components:{
     topRow,
@@ -431,6 +433,7 @@ export default {
   },
   data(){
     return{
+      SVGAisFinish:false,
       emojiArr:[],
       exchangePX:0,//像素换算比例
       keybroadCanDown:true,//键盘落下了，页面跟不跟着下落
@@ -548,17 +551,22 @@ export default {
       soundPopupIsShow:false,//音效弹出层是否弹出
       giftpopup:false,//礼物弹出层
       giftArr:[
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-        {img:require("@/assets/icons/gift1.png"),giftName:'Rocket',price:100},
-
+        {img:require("@/assets/icons/gift_monet.png"),giftName:'money',price:100,svga:'money.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_hand.png"),giftName:'applause',price:100,svga:'applause.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_bear.png"),giftName:'bear',price:100,svga:'bear.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_cake.png"),giftName:'cake',price:100,svga:'cake.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_firework.png"),giftName:'fireworks',price:100,svga:'fireworks.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_kiss.png"),giftName:'kiss',price:100,svga:'mouth.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_lollipop.png"),giftName:'lollipop',price:100,svga:'lollipop.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_music.png"),giftName:'music',price:100,svga:'music.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_ring.png"),giftName:'ring',price:100,svga:'zuan.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_rocket.png"),giftName:'Rocket',price:100,svga:'rocket.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_rose.png"),giftName:'rose',price:100,svga:'rose.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_shose.png"),giftName:'shose',price:100,svga:'shose.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_shower.png"),giftName:'shower',price:100,svga:'shower.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_soap.png"),giftName:'soap',price:100,svga:'soap.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_sportcar.png"),giftName:'sportcar',price:100,svga:'sportCar.svga',isSelect:false},
+        {img:require("@/assets/icons/gift_yacht.png"),giftName:'yacht',price:100,svga:'yacht.svga',isSelect:false},
       ],
       giftCurrent:0,
       distanceX:0, //滑动的X轴方向
@@ -572,6 +580,7 @@ export default {
       moveType:'',//保存点击了哪个图标，控制聊天内容的显示，和是否推页面
       lastEditRange:'',//最后光标位置,
       isClickInput:true,//判断是不是点了input，如果是弹出键盘，如果不是加入表情
+      giftSelectNum:null,//选择礼物的下标
     }
   },
   methods:{
@@ -926,7 +935,13 @@ export default {
       this.giftCurrent = idx
     },
     selectGift(json){
-      console.log(json)
+      let {row,idx} = json;
+      let num = (8*row)+idx;
+      this.giftArr.forEach(item=>{
+        item.isSelect=false
+      })
+      this.giftArr[num].isSelect = true;
+      this.giftSelectNum = num;
     },
     testScroll(event){ //获得群聊的top值，来算出用户是否上滑
       let {clientHeight,scrollHeight,scrollTop} = event.target;
@@ -979,9 +994,28 @@ export default {
     },
     sendTestSvga(){
       console.log(456)
-      this.$dsbridge.call('playSvgaAnim', {url:'http://www.biggold.net.cn/kingset.svga', loop:1}, function (ret) {
-        console.log(ret);
-      });
+      
+      // let num = this.giftSelectNum
+      // this.$dsbridge.call('playSvgaAnim', {url:this.giftArr[num].svga, loop:1}, function (ret) {
+      //   console.log(ret);
+      // });
+      this.renderSVGA()
+    },
+    renderSVGA(){
+      this.SVGAisFinish=true
+      let self = this
+       let num = this.giftSelectNum
+        var player = new SVGA.Player('#svgaCanvas');
+        var parser = new SVGA.Parser('#svgaCanvas'); // Must Provide same selector eg:#demoCanvas IF support IE6+
+        parser.load(self.giftArr[num].svga, function(videoItem) {
+            player.loops = 1;
+            player.setVideoItem(videoItem);
+            player.startAnimation();
+        })
+       player.onFinished((some) => {
+         console.log('动画执行完了')
+         this.SVGAisFinish=false
+       })
     },
     handleMorePopupclick(idx){ //点击了更多弹出层里面的图标
       let item = this.moreRenderArr[idx];
@@ -1043,6 +1077,12 @@ export default {
         height: calc(65vh - 154px);
         overflow: auto;
       }
+    }
+    .svga-container{
+      width: 1080px;
+      height: 100vh;
+      position: absolute;
+      z-index: 999;
     }
     .wocaonida{
       width: 100px;
